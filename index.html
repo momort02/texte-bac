@@ -1,0 +1,1537 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f5ef" />
+    <title>Mes textes du bac — Carnet de révision</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap");
+
+      :root {
+        color-scheme: light;
+        --ink: #272b26;
+        --muted: #77796f;
+        --paper: #f7f5ef;
+        --card: #fffefa;
+        --line: #e9e6dc;
+        --green: #456b55;
+        --green-dark: #355540;
+        --sage: #e6eee5;
+        --orange: #c8784e;
+        --shadow: 0 8px 30px rgba(55, 54, 42, 0.055);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "DM Sans", sans-serif;
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      button,
+      input,
+      textarea {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      .page-shell {
+        width: min(1160px, calc(100% - 48px));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 28px 0 12px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: center;
+        border-radius: 12px;
+        background: var(--green);
+        color: white;
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+      }
+
+      .top-note {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      main {
+        padding: 34px 0 72px;
+      }
+
+      .intro {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 32px;
+        margin-bottom: 30px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--green);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 650px;
+        margin-bottom: 10px;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(34px, 5vw, 52px);
+        font-weight: 500;
+        letter-spacing: -0.035em;
+        line-height: 1.08;
+      }
+
+      .subtitle {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .progress-card {
+        flex: 0 0 250px;
+        padding: 17px 19px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(255, 254, 250, 0.72);
+      }
+
+      .progress-top {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 11px;
+        font-size: 12px;
+      }
+
+      .progress-top span:first-child {
+        color: var(--muted);
+      }
+
+      .progress-top strong {
+        font-size: 13px;
+      }
+
+      .progress-track {
+        height: 6px;
+        overflow: hidden;
+        border-radius: 99px;
+        background: #e9e8df;
+      }
+
+      .progress-fill {
+        width: 0;
+        height: 100%;
+        border-radius: inherit;
+        background: var(--green);
+        transition: width 0.25s ease;
+      }
+
+      .toolbar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 19px;
+      }
+
+      .search-wrap {
+        position: relative;
+        flex: 1;
+      }
+
+      .search-icon {
+        position: absolute;
+        top: 50%;
+        left: 14px;
+        width: 17px;
+        height: 17px;
+        color: #898a81;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+
+      .search {
+        width: 100%;
+        height: 46px;
+        padding: 0 16px 0 42px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        outline: none;
+        background: var(--card);
+        color: var(--ink);
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .search:focus,
+      input:focus,
+      textarea:focus {
+        border-color: #9aaf9b;
+        box-shadow: 0 0 0 3px rgba(69, 107, 85, 0.1);
+      }
+
+      .search::placeholder {
+        color: #a09f96;
+      }
+
+      .add-button {
+        display: inline-flex;
+        height: 46px;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 17px;
+        border: 0;
+        border-radius: 12px;
+        background: var(--green);
+        color: white;
+        font-size: 13px;
+        font-weight: 600;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+
+      .add-button:hover {
+        transform: translateY(-1px);
+        background: var(--green-dark);
+      }
+
+      .add-button svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .text-card {
+        position: relative;
+        display: flex;
+        min-height: 204px;
+        flex-direction: column;
+        padding: 18px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--card);
+        box-shadow: var(--shadow);
+        transition:
+          transform 0.2s,
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .text-card:hover {
+        transform: translateY(-3px);
+        border-color: #d9dfd3;
+        box-shadow: 0 12px 30px rgba(55, 54, 42, 0.09);
+      }
+
+      .card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .card-number {
+        color: #85877c;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .status-pill {
+        padding: 4px 8px;
+        border-radius: 99px;
+        background: #f0efe9;
+        color: #85877c;
+        font-size: 10px;
+        font-weight: 600;
+      }
+
+      .status-pill.mastered {
+        background: var(--sage);
+        color: var(--green-dark);
+      }
+
+      .card-title {
+        display: -webkit-box;
+        margin: 0 0 5px;
+        overflow: hidden;
+        font-family: "Playfair Display", serif;
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 1.25;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+
+      .card-author {
+        margin: 0 0 14px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .card-excerpt {
+        display: -webkit-box;
+        margin: 0;
+        overflow: hidden;
+        color: #85877e;
+        font-size: 12px;
+        line-height: 1.55;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+
+      .card-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: auto;
+        padding-top: 16px;
+      }
+
+      .work-name {
+        overflow: hidden;
+        color: var(--muted);
+        font-size: 11px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .edit-button {
+        display: inline-flex;
+        flex: 0 0 auto;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 0 5px 8px;
+        border: 0;
+        background: transparent;
+        color: var(--green);
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .edit-button:hover {
+        color: var(--green-dark);
+      }
+
+      .edit-button svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      .empty-card {
+        border-style: dashed;
+        border-color: #dcd9ce;
+        background: rgba(255, 254, 250, 0.48);
+        box-shadow: none;
+      }
+
+      .empty-card .card-title {
+        color: #77796f;
+      }
+
+      .empty-card .card-author,
+      .empty-card .card-excerpt {
+        color: #aaa99f;
+      }
+
+      .empty-card .status-pill {
+        background: #f4f2ec;
+      }
+
+      .empty-icon {
+        display: grid;
+        width: 30px;
+        height: 30px;
+        margin: 1px 0 12px;
+        place-items: center;
+        border-radius: 10px;
+        background: #f0efe8;
+        color: #85877c;
+      }
+
+      .empty-icon svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      .no-results {
+        grid-column: 1 / -1;
+        padding: 48px 20px;
+        border: 1px dashed var(--line);
+        border-radius: 16px;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .text-card {
+        cursor: pointer;
+      }
+
+      .text-card:focus-visible {
+        outline: 3px solid rgba(69, 107, 85, 0.45);
+        outline-offset: 3px;
+      }
+
+      dialog {
+        width: min(520px, calc(100% - 32px));
+        max-height: min(90vh, 760px);
+        padding: 0;
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--card);
+        color: var(--ink);
+        box-shadow: 0 24px 80px rgba(31, 35, 29, 0.22);
+      }
+
+      dialog::backdrop {
+        background: rgba(34, 38, 32, 0.4);
+        backdrop-filter: blur(3px);
+      }
+
+      .dialog-inner {
+        padding: 27px;
+      }
+
+      .dialog-heading {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 22px;
+      }
+
+      .dialog-heading h2 {
+        margin-bottom: 4px;
+        font-family: "Playfair Display", serif;
+        font-size: 26px;
+        font-weight: 600;
+      }
+
+      .dialog-heading p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .close-button {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: transparent;
+        color: var(--muted);
+      }
+
+      .close-button:hover {
+        background: #f4f2ec;
+        color: var(--ink);
+      }
+
+      .close-button svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .field {
+        display: block;
+        margin-bottom: 15px;
+      }
+
+      .field-label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .field input,
+      .field textarea {
+        width: 100%;
+        padding: 11px 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        outline: none;
+        background: white;
+        color: var(--ink);
+        font-size: 13px;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .field textarea {
+        min-height: 120px;
+        resize: vertical;
+        line-height: 1.55;
+      }
+
+      .field textarea[name="content"] {
+        min-height: 320px;
+      }
+
+      .field input::placeholder,
+      .field textarea::placeholder {
+        color: #aaa99f;
+      }
+
+      .mastery-toggle {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin: 19px 0 22px;
+        color: #55594f;
+        font-size: 13px;
+      }
+
+      .mastery-toggle input {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--green);
+      }
+
+      .dialog-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding-top: 17px;
+        border-top: 1px solid var(--line);
+      }
+
+      .delete-button {
+        padding: 9px 0;
+        border: 0;
+        background: transparent;
+        color: #a65344;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .delete-button:hover {
+        color: #813c31;
+      }
+
+      .right-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .secondary-button,
+      .save-button {
+        min-height: 40px;
+        padding: 0 15px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: white;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .secondary-button:hover {
+        background: #f4f2ec;
+      }
+
+      .save-button {
+        border-color: var(--green);
+        background: var(--green);
+        color: white;
+      }
+
+      .save-button:hover {
+        border-color: var(--green-dark);
+        background: var(--green-dark);
+      }
+
+      .storage-error {
+        display: none;
+        margin: 0 0 18px;
+        padding: 12px 14px;
+        border: 1px solid #e4b8ad;
+        border-radius: 10px;
+        background: #fff5f1;
+        color: #883e30;
+        font-size: 13px;
+      }
+
+      #detail-dialog {
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        max-height: none;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        background: var(--paper);
+        box-shadow: none;
+      }
+
+      #detail-dialog::backdrop {
+        background: var(--paper);
+      }
+
+      .detail-page {
+        display: flex;
+        min-height: 100%;
+        flex-direction: column;
+      }
+
+      .detail-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 22px clamp(20px, 5vw, 72px);
+        border-bottom: 1px solid var(--line);
+        background: var(--card);
+      }
+
+      .detail-topbar .brand {
+        color: var(--ink);
+      }
+
+      .detail-top-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .detail-edit {
+        display: inline-flex;
+        min-height: 40px;
+        align-items: center;
+        gap: 7px;
+        padding: 0 14px;
+        border: 0;
+        border-radius: 10px;
+        background: var(--green);
+        color: white;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .detail-edit:hover {
+        background: var(--green-dark);
+      }
+
+      .detail-edit svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      .detail-close {
+        width: 40px;
+        height: 40px;
+      }
+
+      .detail-main {
+        width: min(820px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: clamp(36px, 8vh, 84px) 0 64px;
+      }
+
+      .detail-main .eyebrow {
+        margin-bottom: 13px;
+      }
+
+      .detail-title {
+        margin: 0 0 12px;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(36px, 6vw, 62px);
+        font-weight: 500;
+        letter-spacing: -0.035em;
+        line-height: 1.08;
+        overflow-wrap: anywhere;
+      }
+
+      .detail-author {
+        margin: 0;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .detail-status {
+        display: inline-block;
+        margin-top: 21px;
+        padding: 6px 11px;
+        border-radius: 99px;
+        background: #f0efe9;
+        color: #77796f;
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .detail-status.mastered {
+        background: var(--sage);
+        color: var(--green-dark);
+      }
+
+      .detail-divider {
+        height: 1px;
+        margin: 34px 0;
+        border: 0;
+        background: var(--line);
+      }
+
+      .detail-section {
+        margin-bottom: 30px;
+      }
+
+      .detail-label {
+        margin-bottom: 9px;
+        color: var(--green);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .detail-value {
+        margin: 0;
+        color: var(--ink);
+        font-size: 17px;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+      }
+
+      .markdown-content h1,
+      .markdown-content h2,
+      .markdown-content h3 {
+        margin: 1.4em 0 0.45em;
+        font-family: "Playfair Display", serif;
+      }
+
+      .markdown-content h1:first-child,
+      .markdown-content h2:first-child,
+      .markdown-content h3:first-child,
+      .markdown-content p:first-child {
+        margin-top: 0;
+      }
+
+      .markdown-content p,
+      .markdown-content ul,
+      .markdown-content ol,
+      .markdown-content blockquote,
+      .markdown-content pre {
+        margin-bottom: 1em;
+      }
+
+      .markdown-content blockquote {
+        margin-left: 0;
+        padding-left: 16px;
+        border-left: 3px solid var(--line);
+        color: var(--muted);
+      }
+
+      .markdown-content pre {
+        padding: 12px;
+        overflow-x: auto;
+        border-radius: 8px;
+        background: #f0efe9;
+        font-size: 13px;
+      }
+
+      .markdown-content table {
+        width: 100%;
+        margin: 18px 0;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 0.88em;
+      }
+
+      .markdown-content th,
+      .markdown-content td {
+        padding: 8px;
+        border: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+
+      .markdown-content th {
+        background: var(--sage);
+        color: var(--green-dark);
+        font-weight: 700;
+      }
+
+      .detail-empty {
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      @media (max-width: 900px) {
+        .cards-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .intro {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .progress-card {
+          width: min(100%, 350px);
+          flex-basis: auto;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .page-shell {
+          width: min(100% - 32px, 440px);
+        }
+
+        header {
+          padding-top: 18px;
+        }
+
+        .top-note {
+          font-size: 11px;
+        }
+
+        main {
+          padding-top: 33px;
+        }
+
+        .cards-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 11px;
+        }
+
+        .text-card {
+          min-height: 190px;
+          padding: 14px;
+          border-radius: 14px;
+        }
+
+        .card-top {
+          margin-bottom: 15px;
+        }
+
+        .card-title {
+          font-size: 17px;
+        }
+
+        .toolbar {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .add-button {
+          width: 100%;
+        }
+
+        .dialog-inner {
+          padding: 22px 18px;
+        }
+
+        .detail-topbar {
+          padding: 15px 16px;
+        }
+
+        .detail-topbar .brand > span:last-child {
+          display: none;
+        }
+
+        .detail-top-actions {
+          gap: 7px;
+        }
+
+        .detail-edit {
+          min-height: 38px;
+          padding: 0 11px;
+        }
+
+        .detail-close {
+          width: 38px;
+          height: 38px;
+        }
+
+        .detail-main {
+          width: calc(100% - 36px);
+          padding-top: 48px;
+        }
+
+        .detail-author {
+          font-size: 15px;
+        }
+
+        .detail-value {
+          font-size: 15px;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .text-card {
+          min-height: 175px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-shell">
+      <header>
+        <div class="topbar">
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true">L</span
+            ><span>MON CARNET DE FRANÇAIS</span>
+          </div>
+          <span class="top-note">Une fiche à la fois, tu vas y arriver.</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">Objectif bac de français</p>
+            <h1 id="page-title">Mes 16 textes,<br />à mon rythme.</h1>
+            <p class="subtitle">
+              Rassemble tes textes et suis tes progrès, simplement.
+            </p>
+          </div>
+          <div class="progress-card" aria-label="Progression de révision">
+            <div class="progress-top">
+              <span>Textes maîtrisés</span
+              ><strong id="progress-label">0 / 16</strong>
+            </div>
+            <div
+              class="progress-track"
+              role="progressbar"
+              aria-label="Textes maîtrisés"
+              aria-valuemin="0"
+              aria-valuemax="16"
+              aria-valuenow="0"
+            >
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+          </div>
+        </section>
+
+        <div class="storage-error" id="storage-error" role="alert"></div>
+
+        <section aria-label="Mes fiches de révision">
+          <div class="toolbar">
+            <label class="search-wrap">
+              <svg
+                class="search-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                aria-hidden="true"
+              >
+                <circle cx="10.8" cy="10.8" r="6.8"></circle>
+                <path d="m16 16 4.2 4.2"></path>
+              </svg>
+              <input
+                class="search"
+                id="search"
+                type="search"
+                placeholder="Rechercher un texte, un auteur, une œuvre…"
+                aria-label="Rechercher parmi mes textes"
+              />
+            </label>
+            <button class="add-button" id="add-button" type="button">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>
+              Ajouter un texte
+            </button>
+          </div>
+          <div class="cards-grid" id="cards-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="edit-dialog" aria-labelledby="dialog-title">
+      <form class="dialog-inner" id="edit-form">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow" id="dialog-eyebrow">FICHE 01</p>
+            <h2 id="dialog-title">Ton texte</h2>
+            <p>Ajoute les informations utiles à tes révisions.</p>
+          </div>
+          <button
+            class="close-button"
+            id="close-dialog"
+            type="button"
+            aria-label="Fermer"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              aria-hidden="true"
+            >
+              <path d="m6 6 12 12M18 6 6 18"></path>
+            </svg>
+          </button>
+        </div>
+        <label class="field">
+          <span class="field-label">Titre du texte</span>
+          <input
+            name="title"
+            maxlength="120"
+            placeholder="Ex. Le dormeur du val"
+            autocomplete="off"
+          />
+        </label>
+        <label class="field">
+          <span class="field-label">Auteur</span>
+          <input
+            name="author"
+            maxlength="80"
+            placeholder="Ex. Arthur Rimbaud"
+            autocomplete="off"
+          />
+        </label>
+        <label class="field">
+          <span class="field-label">Œuvre / parcours</span>
+          <input
+            name="work"
+            maxlength="120"
+            placeholder="Ex. Cahier de Douai — Émancipations créatrices"
+            autocomplete="off"
+          />
+        </label>
+        <label class="field">
+          <span class="field-label">Contenu</span>
+          <textarea
+            name="content"
+            maxlength="12000"
+            placeholder="Écris ton texte et ton analyse ici…"
+          ></textarea>
+        </label>
+        <label class="mastery-toggle">
+          <input name="mastered" type="checkbox" />
+          <span>Je maîtrise ce texte</span>
+        </label>
+        <div class="dialog-actions">
+          <button class="delete-button" id="delete-button" type="button">
+            Effacer cette fiche
+          </button>
+          <div class="right-actions">
+            <button class="secondary-button" id="cancel-button" type="button">
+              Annuler
+            </button>
+            <button class="save-button" type="submit">Enregistrer</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="detail-dialog" aria-labelledby="detail-title">
+      <div class="detail-page">
+        <div class="detail-topbar">
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true">L</span
+            ><span>MON CARNET DE FRANÇAIS</span>
+          </div>
+          <div class="detail-top-actions">
+            <button class="detail-edit" id="detail-edit" type="button">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                aria-hidden="true"
+              >
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"></path>
+              </svg>
+              Modifier
+            </button>
+            <button
+              class="close-button detail-close"
+              id="close-detail"
+              type="button"
+              aria-label="Fermer la fiche"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                aria-hidden="true"
+              >
+                <path d="m6 6 12 12M18 6 6 18"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <main class="detail-main">
+          <p class="eyebrow" id="detail-number">TEXTE 01</p>
+          <h1 class="detail-title" id="detail-title"></h1>
+          <p class="detail-author" id="detail-author"></p>
+          <span class="detail-status" id="detail-status"></span>
+          <hr class="detail-divider" />
+          <section class="detail-section">
+            <h2 class="detail-label">Œuvre / parcours</h2>
+            <p class="detail-value" id="detail-work"></p>
+          </section>
+          <section class="detail-section">
+            <h2 class="detail-label">Contenu</h2>
+            <div
+              class="detail-value markdown-content"
+              id="detail-content"
+            ></div>
+          </section>
+        </main>
+      </div>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+    <script>
+      const STORAGE_KEY = "mon-carnet-francais-v1";
+      const INITIALIZED_KEY = "mon-carnet-francais-initialized-v1";
+      const TOTAL_CARDS = 16;
+      if (window.marked) marked.setOptions({ breaks: true, gfm: true });
+      const emptyCard = () => ({
+        title: "",
+        author: "",
+        work: "",
+        content: "",
+        mastered: false,
+      });
+      const starterCards = [
+        {
+          title: "Vénus Anadyomène",
+          author: "Arthur Rimbaud",
+          work: "Cahiers de Douai",
+          content:
+            "## Extrait et notes\n\nVénus Anadyomène\n\nComme d’un cercueil vert en fer blanc, une tête\nDe femme à cheveux bruns fortement pommadés\nD’une vieille baignoire émerge, lente et bête,\nAvec des déficits assez mal ravaudés ;\n\nPuis le col gras et gris, les larges omoplates\nQui saillent ; le dos court qui rentre et qui ressort ;\nPuis les rondeurs des reins semblent prendre l’essor ;\nLa graisse sous la peau paraît en feuilles plates ;\n\nL’échine est un peu rouge, et le tout sent un goût\nHorrible étrangement ; on remarque surtout\nDes singularités qu’il faut voir à la loupe…\n\nLes reins portent deux mots gravés : Clara Venus ;\n– Et tout ce corps remue et tend sa large croupe\nBelle hideusement d’un ulcère à l’anus.\n\n## Introduction\n\nSouvent qualifié de « poète maudit », Arthur Rimbaud est un écrivain au génie précoce, qui a contribué au renouvellement de la poésie du XIXème siècle. En 1870, âgé seulement de 16 ans et alors qu'il est en fugue, il écrit les 22 poèmes qui constitueront son premier recueil : Cahiers de Douai. Le manuscrit, confié au départ à son ami Paul Demeny, sera publié après sa mort en 1919. Ce recueil peut être décrit comme le cri de révolte d'un jeune poète face à toutes les formes d'autorité mais aussi comme une œuvre en voie d'émancipation par rapport aux codes de la poésie classique. Le poème étudié est un sonnet dans lequel le jeune poète reprend un motif fréquemment utilisé par les peintres de la Renaissance, dont Botticelli : « Venus Anadyomène », littéralement « Vénus surgie des eaux », qui raconte comment Vénus naquit au milieu des flots et émergea majestueusement. Rimbaud choisit toutefois de tourner en dérision ce mythe antique.\n\n## Problématique\n\nComment ce poème parodique permet-il au poète de s'émanciper des codes traditionnels de la beauté ?\n\n## Titre\n\nLe thème du poème (mythologie grecque) + forme classique (un sonnet) semblent annoncer un texte dans la pure tradition lyrique toutefois, le but de l'auteur est de tourner en dérision les règles de la beauté classique en art et en poésie. Rimbaud va donc décevoir les attentes du lecteur et créer une opposition entre le titre du poème et son contenu.\n\n## Analyse \n\n### Strophe 1 : l'émergence d'une tête\n\nVers 1 : poème s'ouvre sur une comparaison macabre « comme d'un cercueil » = introduit le thème de la mort, en opposition au mythe de la naissance de Vénus. Détournement ironique apparaît donc clairement dès le départ. Effet de peur par la mention de cette tête isolée du corps au vers 1. Contre-rejet et article indéfini « une tête » = crée un effet d'attente pour le lecteur, ralentit la lecture et imite la lenteur avec laquelle la femme va s'extraire de la baignoire. Vision presque fantastique qui s'offre au lecteur. « Vert » = couleur de la putréfaction = effet de dégoût.\nVers 2 : adj de couleur « bruns » = nouveau détournement de la Vénus traditionnelle, blonde. Adv d'intensité « fortement pommadés » évoque un manque de naturel et de fraîcheur, bien loin de la chevelure de la Vénus de Botticelli, la chevelure flottant au vent.\nVers 3 : le GN « vieille baignoire » = accentue le caractère glauque de la scène tout en parodiant le lieu de la naissance de Vénus. Le cadre naturel et majestueux de la mer remplacé par un objet bon marché, du quotidien. Rimbaud choisit de montrer une Vénus prosaïque et quotidienne. Adj péjoratifs « bête et lente » = dessinent un portrait péjoratif de la femme, démarche lourde (on est loin de l'idéalisation et de la grâce de la déesse). Rime suffisante « tête » / « bête » dévalorise également la femme d'un point de vue intellectuel.\nVers 4 : Adv d'intensité « assez mal ravaudés » poursuivent la critique = un maquillage outrancier, vulgaire, qui ne parvient pas à masquer la laideur de la femme. Rime avec « pommadés » = souligne les artifices de cette femme.\n&rarr; Alors que Vénus incarne la perfection physique dans la mythologie grecque, la Vénus de Rimbaud incarne la laideur et la vulgarité. Il s'agit bien d'une relecture du mythe qui consiste à inverser les valeurs de cette divinité.\n\n### Strophe 2 : la description se poursuit, allant du cou jusqu'aux reins\n\nVers 5 et 7 : anaphore de l'adverbe de temps « puis » = rythment les diverses étapes de la sortie du bain ; comme pour suggérer encore l'idée d'une sortie laborieuse.\nChamp lexicale du corps : différentes parties de la Vénus sont décrites mais elles ne renvoient pas à l'idéal poétique féminin. « Omoplates » ou bien « col », « graisse » = termes inattendus dans un poème, davantage utilisés par un médecin. De plus, le poète met en avant le caractère disgracieux de cette femme avec des adj dépréciatifs « gras et gris », « larges » « court » et « larges ». Sonorités dures, désagréables (allitération en « g » et « r » qui insiste sur le dégoût.)\nVers 6 : rejet « qui saillent » met en évidence la silhouette disgracieuse. Rejet qui crée aussi une rupture du rythme de l'alexandrin (4-6 au lieu de 6-6) = écriture de Rimbaud cherche donc à rappeler au lecteur ce manque d'harmonie. Corps qui est une me antiphrase [antithèse] de la perfection classique : « graisse » et « rondeurs » confirment cette image déformée de la Venus traditionnelle. Les subordonnées relatives « qui rentre et qui ressort » = effet d'étrangeté, mouvement mécanique qui déshumanise la femme.\nVers 8 : La métaphore « en feuilles plates » interroge = est-ce une réf à l'écriture, manière de faire de ce poème une revendication d'une poésie nouvelle ?\n\n### Premier tercet : l'évocation des sens du poète\n\nVers 9 : « Échine » = animalisation de la femme = confirme le ton parodique. Le plaisir des sens que suscite traditionnellement Vénus n'apparaît pas dans ce poème. La vue est évoquée à travers l'adj de couleur « rouge » mais c'est une couleur violente, qui rappelle le sang et s'éloigne totalement de la peau pâle et noble de Vénus. Elle semble même créer un dérèglement des sens du poète : « sent un goût » = mélange de l'odorat et du goût = synesthésie.\nVers 10 : Rejet « horrible étrangement » = mise en valeur de l'effet de dégoût suscité par cette Vénus. « Étrangement » est placé à la césure comme pour appuyer sur le paradoxe de cette scène : au sortir de son bain, cette femme devrait normalement sentir bon ! Mais cet adverbe peut aussi suggérer une certaine fascination, curiosité du poète pour ce corps = l'expression constitue donc un oxymore.\nVers 10-11 : enjambement crée un effet de dysharmonie (rappelant celle du corps de cette Vénus), loin de la fluidité classique de l'alexandrin. Rimbaud manifeste ainsi son rejet des règles de la poésie classique.\nLe pluriel « des singularités » = souligne l'imperfection du corps, très éloigné des canons de la beauté classique (mais annonce aussi le tatouage qui va être décrit dans la dernière strophe) mais ce vers peut aussi être une invitation faite au lecteur pour examiner attentivement l'originalité de ce poème.\nLa « loupe » = accessoire non adapté au poète, mais plutôt à un scientifique, regard d'un médecin. Le poème propose ainsi un regard plutôt clinique sur le corps (vocabulaire de l'anatomie déjà relevé plus haut) mais peu artistique.\n\n### Second tercet : une vision d'horreur vient clore le poème\n\nVers 12 : Expression latine tatouée sur la jeune femme = annonce au lecteur que cette femme est probablement une prostituée. Ce nom prend un sens ironique ici (comme le titre du poème) : effet de contraste entre la divinité et la laideur physique du personnage. Nom paraît donc peu approprié !\nVers 13 : Cette laideur et cette vulgarité s'intensifient encore dans ce dernier tercet. Conjonction de coordination « Et » + le tiret introduisent la chute du poème et la dernière étape du dévoilement du corps. La trivialité¹ de la scène atteint son paroxysme avec l'évocation de la « croupe » = nouvelle animalisation. Le verbe de mouvement « tend sa large croupe » = évoque un comportement exhibitionniste et indécent (par opposition à la pudeur de la Vénus de Botticelli qui cache son intimité). Le verbe « remuer » = manque de grâce, rappelle là encore davantage le déplacement d'une bête.\nVers 14 : Oxymore « belle hideusement » = réconciliation beauté / laideur. Rimbaud s'émancipe ainsi des codes traditionnelle en poésie, à la manière de Baudelaire à la même époque qui voulait extraire la Beauté du mal et transformer la boue en or (avec son recueil Les Fleurs du mal paru en 1857). La laideur devient un sujet digne d'écriture.\nPointe très provocatrice : rime riche (3 sons en commun) « anus » / « Vénus » = désacralise totalement l'idéal de la beauté féminine. Langage devient obscène² et vient clore la liste des mots renvoyant au lexique de l'anatomie ; Le terme « ulcère » = autre réf implicite au métier de prostituée puisque cela renvoie à un symptôme de la syphilis (maladie sexuellement transmissible). Le poète veut ici clairement scandaliser le lecteur mais il souhaite aussi engager une réflexion sur la poésie : il remet en question les codes de la poésie lyrique traditionnelle.\n\n## Conclusion :\n\nAinsi, la Vénus de la mythologie grecque est ici réduite à une vieille femme hideuse sortant d'une baignoire, probablement une prostituée comme le suggère le dernier tercet. A travers cette parodie, Rimbaud cherche à remettre en question les canons esthétiques qui ont nourri son éducation, tout en proposant une nouvelle conception de la poésie. En effet, il montre que la laideur a sa place en poésie. Le poème peut donc se définir comme un contre-blason.",
+          mastered: false,
+        },
+        {
+          title: "Le Mal",
+          author: "Arthur Rimbaud",
+          work: "Cahiers de Douai",
+          content:
+            "## Extrait et Notes\n\nLe Mal\n\nTandis que les crachats rouges de la mitraille\nSifflent tout le jour par l’infini du ciel bleu ;\nQu’écarlates ou verts, près du Roi qui les raille,\nCroulent les bataillons en masse dans le feu ;\n\nTandis qu’une folie épouvantable broie\nEt fait de cent milliers d’hommes un tas fumant ;\n– Pauvres morts ! dans l’été, dans l’herbe, dans ta joie,\nNature ! ô toi qui fis ces hommes saintement !…\n\n– Il est un Dieu, qui rit aux nappes damassées\nDes autels, à l’encens, aux grands calices d’or ;\nQui dans le bercement des hosannah s’endort,\n\nEt se réveille, quand des mères, ramassées\nDans l’angoisse, et pleurant sous leur vieux bonnet noir,\nLui donnent un gros sou lié dans leur mouchoir !\n\n## Introduction : \n\nEn 1870 éclate la guerre entre la France et la Prusse. Pour le poète, ce conflit représente le « Mal » incarné par l'Empereur Nap III qui déclenche cette guerre sans se préoccuper des soldats. Mais ce sonnet va plus loin encore en s'attaquant à Dieu. Le poème est un sonnet antimilitariste et antichrétien, construit sur une seule phrase.\n\n## Problématique : \n\nComment la description de la guerre conduit-elle à une dénonciation de la religion et du pouvoir politique ?\n\n## Analyse\n\n### Premier mouvement : Vers 1 à 6 : le tableau d'un massacre\n\n| Extrait | Procédé | Interprétation |\n| :--- | :--- | :--- |\n| « Tandis que » (vers 1, puis 3 et 5) | Locution conjonctive qui introduit 3 proposition subordonnée circonstancielle de temps | Effet d'insistance sur la durée des combats, leur caractère ininterrompu |\n| « Crachats rouges de la mitraille » | Personnification + adj de couleur + allitération en -r | Violence des tirs. Réalisme de la couleur « rouge » = sang des blessés. Fait entendre le bruit des armes. |\n| « Sifflent » | Verbe qui personnifie les armes | Évoque un bruit strident, désagréable. Armes semblent être vivantes (par opposition aux soldats). Enjambement vers 1-2 = imite le caractère incessant des tirs |\n| « Croulent les bataillons en masse » | Inversion sujet-verbe, pluriel | Mise en relief des pertes humaines. Effet tragique. Hommes se confondent dans une masse, perte de leur individualité. Aucune mention à leur douleur = contribue encore à les déshumaniser. |\n| « Tout le jour » / « L'infini du ciel bleu » | Hyperbole | Tonalité épique = impressionner le lecteur, montrer toute l'horreur et l'ampleur des combats. |\n| « Le Roi qui les raille » | Subordonnée relative précisant l'attitude de Nap III. Majuscule sur le nom commun | Rappel de sa puissance. Seule présence humaine du texte et pourtant, n'a pas un comportement digne de sa fonction. Image négative de Napoléon III : indifférent aux morts de ses combattants. |\n| « ciel bleu » / « feu » | Mots placés à la rime et formant 1 antithèse | Effet de contraste entre la beauté et pureté du ciel et la surface de la terre transformée en enfer |\n| « Une folie épouvantable broie » | Personnification + verbe évoquant la violence | Toute humanité a disparu parmi les soldats qui ne sont plus que des machines à tuer. Amplification avec adj « épouvantable » qualifiant la « folie » = registre épique. La scène devient presque surnaturelle de par sa violence. |\n| « Cent milliers d'hommes un tas fumant » | Pluriel / singulier<br> &rdsh; hyperbolique [métaphore] | Effet de contraste entre le pluriel et le singulier. La guerre anéantit des milliers de vie et déshumanisation. |\n\n**Bilan du mouvement :** ainsi, les notations de couleur et de bruit et de mouvement rendent compte de la guerre de manière réaliste. La description relève de l'hypotypose = fig. de style qui consiste à décrire les choses de manière si vive que le lecteur à l'impression de voir la scène s'animer sous ses yeux.\n\n---\n\n### Deuxième mouvement : VERS 7-8 : intervention du poète qui interpelle la nature\n\n| Extrait | Procédé | Interprétation |\n| :--- | :--- | :--- |\n| « - Pauvres morts ! » | Exclamation marquant le registre affectif + tiret d'intervention de RIMBAUD + lexique | Tonalité lyrique. Poète éprouve de la pitié pour ces hommes. |\n| « Dans l'été, dans l'herbe, dans ta joie » | Énumération | Éloge de la nature (contraste avec la scène de guerre) |\n| « Nature ! » | Apostrophe + personnification | Mise en valeur de la nature qui est glorifiée (par opposition à la figure du Roi) |\n| « Ô toi qui fis ces hommes saintement » | Ô lyrique <u>ou</u> Ô vocal, adverbe de manière, 2éme personne du singulier | Intimité avec la Nature dont le caractère sacré et le pouvoir de création sont soulignés. Respect et admiration du poète pour la nature qui est divinisée. Rôle maternel et protecteur de la nature. S'oppose aux vers précédents et à la folie meurtrière |\n\n---\n\n### Troisième mouvement : l'indifférence de Dieu (premier tercet)\n\n| Extrait | Procédé | Interprétation |\n| :--- | :--- | :--- |\n| « Il est un Dieu » | Proposition principale | Révélation de l'action de Dieu (= temps fort) |\n| « Un Dieu » | Article indéfini | Mépris du poète qui semble ne pas reconnaître Dieu, mise à distance. |\n| « Qui rit » | Subordonnée relative faisant écho à « qui les raille » | Le poète dénonce l'indifférence de Dieu et en donne une image provocatrice - il privilégie et affirme son pouvoir politique / religieux |\n| « Nappes damassées, l'encens, grands calices d'or » | Énumération des éléments qui constituent les cérémonies religieuses. | Insistance sur le luxe des cérémonies. Dénonce richesses des églises &ne; pauvreté du peuple |\n| « Bercement s'endort » | Lexique du sommeil. Rime riche avec « or » | Son mélodieux des chants s'opposant au sifflement des armes. Atmosphère apaisante s'opposant à la violence des combats |\n\n---\n\n### Quatrième mouvement : la cupidité de Dieu (deuxième tercet)\n\n| Extrait | Procédé | Interprétation |\n| :--- | :--- | :--- |\n| « Et se réveille, quand (...) lui donnent » | Subordonnée circonstancielle de temps. Indique 2 actions simultanées | Dieu se réveille donc au moment précis où les mères, inquiètes pour leurs enfants, versent de l'argent dans l'espoir de les sauver. Cupidité de l'Eglise est donc dénoncée. |\n| « Un gros sou lié dans leur mouchoir ! » | Adjectif péjoratif (Gros) +  exclamation | Le poète exprime son indignation. Pointe du sonnet = marquer le lecteur par une situation scandaleuse. Faire réfléchir le peuple sur leur foi aveugle. |\n| « Ramassées / Dans l'angoisse pleurant / vieux bonnet noir / mouchoir » | Métaphore + lexique du deuil + adjectif : rappellent leur pauvreté (gros sou) | Tableau pathétique de la douleur des mères, endeuillées. Contraste avec la joie des « hosannah ». Le poète montre donc comment l'Eglise profite honteusement du malheur de la société pour s'enrichir. |\n\n## Conclusion : \n\nA travers ce poème, Rimbaud dénonce le « mal » que représente la guerre dont la puissance détruit tout ce que la Nature crée. le poème est construit sur une opposition très forte entre d'une part la violence de la guerre et la douleur des mères et d'autre part l'indifférence de l'Empereur et de l'Eglise face aux victimes. Le poète transmet son indignation et sa douleur aux lecteurs. Le poète s'émancipe donc clairement du pouvoir politique et du pouvoir religieux présentés comme un cruel instrument de domination du peuple. Il expose donc son athéisme et son anticléricalisme.",
+          mastered: false,
+        },
+        {
+          title: "Ma Bohême",
+          author: "Arthur RImbaud",
+          work: "Cahiers de Douai",
+          content:
+            "## Extrait et note\n\nMa Bohême\n\nJe m’en allais, les poings dans mes poches crevées ;\nMon paletot aussi devenait idéal ;\nJ’allais sous le ciel, Muse ! et j’étais ton féal ;\nOh ! là ! là ! que d’amours splendides j’ai rêvées !\n\nMon unique culotte avait un large trou.\n– Petit-Poucet rêveur, j’égrenais dans ma course\nDes rimes. Mon auberge était à la Grande-Ourse.\n– Mes étoiles au ciel avaient un doux frou-frou\n\nEt je les écoutais, assis au bord des routes,\nCes bons soirs de septembre où je sentais des gouttes\nDe rosée à mon front, comme un vin de vigueur ;\n\nOù, rimant au milieu des ombres fantastiques,\nComme des lyres, je tirais les élastiques\nDe mes souliers blessés, un pied près de mon cœur !\n\n## Introduction\n\nDans ce sonnet, l'un des plus célèbres de Rimbaud, le poète évoque la vie de Bohème qui a pu être la sienne durant ses nombreuses fugues de Charleville pour Paris ou la Belgique. Il s'agit donc à la fois d'un poème autobiographique et rêvé (le sous-titre « fantaisie » désignant une œuvre d'imagination).\n\n## Problématique\n\nComment cet hymne à l'errance permet-il à Rimbaud de célébrer la poésie ? \nOU : \nEn quoi ce poème célèbre-t-il à la fois le goût de l'errance et de la liberté poétique ?\n\n## Analyse\n\n### PREMIER MOUVEMENT : LE RÉCIT DES VAGABONDAGES DU POÈTE (deux quatrains : vers 1 à 8)\n\n> Je m'en allais, les poings dans mes poches crevées\n\nUsage de la 1ere pers = confirme la dimension autobiographique du texte.\nPoème s'ouvre sur un temps du récit : l'imparfait d'habitude « je m'en allais » : R. évoque une situation déjà vécue pls fois : celle de la fugue. On note qu'il n'y a pas de destination mentionnée : il s'agit bien d'une errance. Le cc de manière « les poings dans mes poches crevées » nous indique sa pauvreté mais aussi un rappel de sa révolte. Étrangement, il a choisi de faire rimer « crevées » avec « rêvées » : cet état de pauvreté ne semble donc pas le faire souffrir, bien au contraire, il semble ainsi libéré des codes de la société bourgeoise qu'il déteste.\nAssonance en -é vient rythmer le premier quatrain et imiter le pas du poète. C'est un pas qui n'est pas régulier : le rythme de son alexandrin est brisé (4-8 et non 6-6) : il traduit ainsi l'errance.\n> Mon paletot aussi devenait idéal\n\nAdj « idéal » peut être un jeu de mot et renvoyer soit à la misère du poète (son manteau est tellement usé qu'il n'est plus qu'une « idée ») ou bien idéal pour voyager car il n'a pas besoin de plus. Dans tous les cas, ce mot prend une connotation positive, montrant une fois encore que le dénuement du poète n'est en rien un obstacle à la création poétique.\n> J'allais sous le ciel, Muse ! Et j'étais ton féal\n\nRépétition de verbe aller en début de vers = effet d'insistance sur le plaisir du poète à vagabonder.\nApostrophe et personnification de la Muse et réf au « ciel » = Rimbaud se rapproche ici des poètes romantiques qui invoquent l'inspiration venue du ciel. Ainsi, la Muse est la seule guide du poète au cours de son errance. Le ciel rappelle aussi importance de la nature, avec laquelle le poète est souvent en communion. La métaphore « ton féal » renvoie encore à la conception romantique du poète qui est soumis à la Muse. Le tutoiement montre une relation très forte entre le poète et cette Muse, qui règne en maîtresse sur son inspiration. Rimbaud semble donc profiter de cette errance pour se livrer entièrement à la poésie.\n> Oh ! Là ! Là ! Que d'amours splendides j'ai rêvées !\n\nRupture amené au vers 4 par les interjection qui témoignent de l'enthousiasme du poète devant les rêves qui ont été les siens. Avec ces interjections, le poète propose un nouveau langage poétique et marque son émancipation. On ressent une distanciation critique du poète qui fait preuve d'ironie (avec la répétition des tournures exclamatives sur ses rêves passés). Ici, le poète tourne en dérision la poésie romantique amoureuse, souvent fondée sur un style grandiloquent. Son alexandrin est disloqué, la césure (= pause centrale de l'alexandrin, divisant le vers en deux hémistiches) n'est pas respectée. Ce choix traduit une fois encore l'avancée chaotique du jeune homme sur les chemins. Rythme du poème = imite la flânerie du poète.\n> Mon unique culotte avait un large trou\n\nEncore un détail réaliste sur la pauvreté du poète avec l'adjectif « unique » et le « trou » vient faire écho aux « poches crevées » du vers 1. Le trou vient aussi préparer la métaphore filée du Petit-Poucet.\n> Petit -Poucet rêveur, j 'égrenais dans ma course\n> des rimes. Mon auberge était à la grande-Ourse\n\nIntroduction d'une atmosphère merveilleuse avec la réf au psg du conte de fées. Cette référence évoque aussi le monde de l'enfance, dont Rimbaud n'est pas si loin... Mais ici, l'adj « rêveur » vient conférer au personnage une connotation positive. L'errance est choisie (et non subie contrairement au psg du conte). Du trou de son pantalon ne sort non pas des cailloux mais des « rimes » : ce terme est mis en valeur grâce au rejet. Là encore, il montre que ses fugues sont étroitement liées à la création poétique. Métaphore « Grande-Ourse » pour évoquer son lieu de vie = montre que le poète dort à la belle étoile et évoque encore une fois la proximité avec la nature.\n> Mes étoiles au ciel avaient un doux frou-frou\n\nDéterminant possessif « mes » = surprenant. C'est comme si Rimbaud s'appropriait les éléments de la nature. Il ne possède rien de matériel (ou le strict minimum) mais le spectacle que lui offre la nature est sa vraie « richesse ». L'univers merveilleux amorcé avec la réf au Petit-Poucet se poursuit ici puisque les étoiles s'animent et émettent une musique : « un doux frou-frou ». Cette onomatopée montre l'audace du poète car cette nature de mots est généralement proscrite en poésie. Rimbaud se moque encore des règles de la poésie romantique qui privilégie le langage soutenu. Ici, le terme « frou-frou » évoque la douceur et appartient à un langage enfantin, naïf.\n\n### DEUXIÈME MOUVEMENT : LA COMMUNION AVEC LA NATURE (premier tercet)\n\n> Et je les écoutais, assis au bord des routes\n\nAvec le pronom « les » faisant référence aux étoiles évoquées dans la strophe précédente, Rimbaud refuse une nouvelle règle d'écriture du sonnet : il brise en effet l'unité strophique entre les quatrains et les tercets. Verbe « écouter » renvoie au sens de l'ouïe : le contact du poète avec la nature stimule tous ses sens : champ lexical des sens se retrouve au vers suivant avec le toucher « je sentais » et le goût avec « vin ». Verbe « écouter » = étrange car normalement, le poète devrait regarder les étoiles. Cela montre à quel point le poète est exalté lorsqu'il se retrouve en pleine nature\nCCL « au bord des routes » = renvoie à une place symbolique. Indique sa marginalité puisque Rimbaud s'émancipe des règles sociales et poétiques de son époque. Cette marginalité devient un atout lui permet d'être plus attentif aux signes de la nature (les étoiles)\n> Ces bons soirs de septembre où je sentais des gouttes\n\nIndication temporelle renvoie à la période des vendanges quand les fruits arrivent à maturation, tels les rimes du poète qu'il a « égrenées » (strophe 2) auparavant.\n> De rosée à mon front, comme un vin de vigueur\n\nOn remarque que la « rosée » entraîne des correspondances entre les sensation du poète : ce sont des synesthésies. Il y a ici une confusion entre le toucher « gouttes de rosée » et le goût « vin de vigueur » = encore une fois, il suggère que la nature joue un rôle central dans son bonheur et aussi dans son inspiration poétique. Comp « comme un vin de vigueur » renvoie à une eau-de-vie soit à un alcool fort. Le poète évoque donc l'ivresse des sens : c'est-à-dire au sentiment de bien-être et d'euphorie qu'amène son errance en pleine nature. La nature semble donc avoir le pouvoir de « nourrir » le poète (au sens figuré : elle lui donne l'inspiration). On trouve en effet plusieurs mots renvoyant à cette idée de nourriture : « le vin » « bons » : « gouttes »\nCette célébration d'une nature nourricière et inspirante le conduit alors à célébrer la création poétique dans la dernière strophe...\n\n### TROISIÈME MOUVEMENT : LE BONHEUR DE LA CRÉATION POÉTIQUE (deuxième tercet)\n\n> Où, rimant au milieu des ombres fantastiques\n\nLa nature est progressivement transfigurée (= métamorphosée) par le regard et l'écriture du poète : on retrouve en effet une atmosphère merveilleuse (rappelant le sous-titre du poème). La métaphore des « ombres fantastiques » = référence aux arbres ? aux silhouettes humaines croisées sur son chemin mais auxquelles le poète ne prête pas attention ?Le p présent « rimant » introduit le champ lexical de l'écriture qui parcourt cette dernière strophe : « lyres » = instrument des poètes dans la mythologie, « pied » (= unité de mesure du vers)\n> Comme des lyres, je tirais les élastiques\n> De mes souliers blessés, un pied près de mon cœur !\n\nComparaison des souliers à des « lyres » et métaphore des « élastiques » pour désigner les lacets = humour du poète qui tourne en dérision le lyrisme traditionnel. La lyre, objet noble du poète, associé à Orphée, est ici associé à un objet trivial, banal : des souliers. Comme dans le strophe 1, le poète se moque de ses propres émois poétiques. De même, il fait rimer avec audace les adjectifs « fantastiques » / « élastiques », mélangeant ainsi deux univers : le surnaturel et le monde du quotidien.\nLa métonymie « mes souliers blessés » (= ce sont en réalité ses pieds qui sont blessés) renvoie aux heures de marche du vagabond. Mais on peut penser que son cœur est également « blessé » par le chemin poétique semé d' « ombres » = obstacles à l'écriture.\nDernier hémistiche énigmatique : une nouvelle fois, Rimbaud semble se moquer des règles du sonnet dont le derniers vers (= la chute) est censée jouer le rôle de révélation. On observe un jeu de mots sur la polysémie du nom « pied » = chaussure du marcheur mais aussi la mesure du vers latin qui s'appelle le « pied ». Contraste entre les « pieds » qui touchent le sol (= caractère prosaïque) et le « cœur » symbole de l'amour, lié à la poésie lyrique. . Par ce rapprochement étonnant, le poète semble une fois encore se moquer avec humour des clichés de la poésie romantique. Il parvient en tout cas à combiner au sein d'une même expression ses deux amours : l'errance et la poésie qu'il porte tous deux dans son cœur.\nCe sonnet célèbre avec humour la liberté recherchée sans souci du lendemain, au sein d'une nature bienveillante. Rimbaud fait de la poésie un véritable art de vivre. L'errance y est aussi présentée comme un moyen de s'évader dans la création poétique et de s'émanciper des codes traditionnels. Ce poème justifie probablement le surnom donné au poète par son amant Paul Verlaine : « l'homme aux semelles de vent »\nL'errance est un thème clé des Cahiers de Douai : « Au cabaret-vert » fait écho à « Ma Bohème » et souligne le plaisir évident du poète à vagabonder librement et à profiter aussi de bonheurs simples.\n\n### Focus sur le mot « bohème » :\n\nC'est un nom issu du latin « bohemus » qui désigne un habitant de la Bohême. Le bohémien est un des membres du groupe nomade issu de ce pays d'Europe centrale, aujourd'hui situé en république tchèque. C'est au XVII ème siècle que l'expression « vie de bohème » qualifie un mode de vie qui s'affranchit des règles communes. Au XIXème siècle, le romantisme associe la bohème au refus d'une existence bourgeoise. Il s'agit également de la période durant laquelle les bohémiens prennent l'image de populations nomades dangereuses. Le mot prend alors une connotation xénophobe, raciste, qui demeure parfois aujourd'hui dans la langue française. Dans l'imaginaire commun, vivre en bohème est fréquemment associé à la vie d'artiste ou étudiante. Cette existence à la marge séduit Rimbaud parce qu'elle correspond à son expérience personnelle.",
+          mastered: false,
+        },
+      ];
+      const errorBanner = document.querySelector("#storage-error");
+      const grid = document.querySelector("#cards-grid");
+      const dialog = document.querySelector("#edit-dialog");
+      const detailDialog = document.querySelector("#detail-dialog");
+      const form = document.querySelector("#edit-form");
+      const search = document.querySelector("#search");
+      let activeCard = null;
+      let storageAvailable = true;
+      let cards = Array.from({ length: TOTAL_CARDS }, emptyCard);
+
+      function showStorageError(message) {
+        errorBanner.textContent = message;
+        errorBanner.style.display = "block";
+      }
+
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved !== null) {
+          const parsed = JSON.parse(saved);
+          if (
+            !Array.isArray(parsed) ||
+            parsed.length !== TOTAL_CARDS ||
+            parsed.some(
+              (card) =>
+                card === null ||
+                typeof card !== "object" ||
+                ["title", "author", "work"].some(
+                  (key) => typeof card[key] !== "string",
+                ) ||
+                [
+                  "content",
+                  "excerpt",
+                  "introduction",
+                  "problematics",
+                  "partI",
+                  "partII",
+                  "partIII",
+                  "conclusion",
+                ].some(
+                  (key) =>
+                    card[key] !== undefined && typeof card[key] !== "string",
+                ) ||
+                typeof card.mastered !== "boolean",
+            )
+          ) {
+            throw new Error(
+              "Les données enregistrées ne sont pas au bon format.",
+            );
+          }
+          const normalizedCards = parsed.map((card) => {
+            const legacyContent = [
+              ["Extrait et notes", card.excerpt],
+              ["Introduction", card.introduction],
+              ["Problématique(s)", card.problematics],
+              ["I — Premier mouvement", card.partI],
+              ["II — Deuxième mouvement", card.partII],
+              ["III — Troisième mouvement", card.partIII],
+              ["Conclusion", card.conclusion],
+            ]
+              .filter(([, value]) => typeof value === "string" && value.trim())
+              .map(([heading, value]) => `## ${heading}\n\n${value}`)
+              .join("\n\n");
+            return {
+              ...emptyCard(),
+              title: card.title,
+              author: card.author,
+              work: card.work,
+              content:
+                typeof card.content === "string" ? card.content : legacyContent,
+              mastered: card.mastered,
+            };
+          });
+          const isBlank = normalizedCards.every(
+            (card) =>
+              !card.title &&
+              !card.author &&
+              !card.work &&
+              !card.content &&
+              !card.mastered,
+          );
+          cards =
+            isBlank && localStorage.getItem(INITIALIZED_KEY) !== "1"
+              ? [
+                  ...starterCards.map((card) => ({ ...emptyCard(), ...card })),
+                  ...Array.from(
+                    { length: TOTAL_CARDS - starterCards.length },
+                    emptyCard,
+                  ),
+                ]
+              : normalizedCards;
+          if (isBlank && localStorage.getItem(INITIALIZED_KEY) !== "1") {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
+            localStorage.setItem(INITIALIZED_KEY, "1");
+          }
+        } else {
+          cards = [
+            ...starterCards.map((card) => ({ ...emptyCard(), ...card })),
+            ...Array.from(
+              { length: TOTAL_CARDS - starterCards.length },
+              emptyCard,
+            ),
+          ];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
+          localStorage.setItem(INITIALIZED_KEY, "1");
+        }
+      } catch (error) {
+        storageAvailable = false;
+        showStorageError(
+          "Impossible de lire tes fiches enregistrées. Elles ne seront pas modifiées. " +
+            error.message,
+        );
+      }
+
+      function persistCards() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
+          localStorage.setItem(INITIALIZED_KEY, "1");
+          storageAvailable = true;
+          errorBanner.style.display = "none";
+          return true;
+        } catch (error) {
+          storageAvailable = false;
+          showStorageError(
+            "La sauvegarde a échoué. Vérifie l’espace disponible de ton navigateur, puis réessaie. " +
+              error.message,
+          );
+          return false;
+        }
+      }
+
+      function render() {
+        const query = search.value.trim().toLocaleLowerCase("fr");
+        grid.replaceChildren();
+        let visibleCards = 0;
+
+        cards.forEach((card, index) => {
+          const searchable = [card.title, card.author, card.work, card.content]
+            .join(" ")
+            .toLocaleLowerCase("fr");
+          if (query && !searchable.includes(query)) return;
+          visibleCards += 1;
+
+          const article = document.createElement("article");
+          article.className = "text-card" + (card.title ? "" : " empty-card");
+          article.tabIndex = 0;
+          article.setAttribute(
+            "aria-label",
+            `Afficher la fiche ${index + 1}${card.title ? " : " + card.title : ""}`,
+          );
+          article.innerHTML = `
+          <div class="card-top">
+            <span class="card-number">TEXTE ${String(index + 1).padStart(2, "0")}</span>
+            <span class="status-pill"></span>
+          </div>
+          <div class="empty-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5v14M5 12h14"></path></svg>
+          </div>
+          <h2 class="card-title"></h2>
+          <p class="card-author"></p>
+          <p class="card-excerpt"></p>
+          <div class="card-bottom">
+            <span class="work-name"></span>
+            <button class="edit-button" type="button">
+              Modifier
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"></path></svg>
+            </button>
+          </div>`;
+
+          article.querySelector(".status-pill").textContent = card.mastered
+            ? "Maîtrisé"
+            : "À réviser";
+          article
+            .querySelector(".status-pill")
+            .classList.toggle("mastered", card.mastered);
+          article.querySelector(".card-title").textContent =
+            card.title || "Nouveau texte";
+          article.querySelector(".card-author").textContent =
+            card.author || "Auteur à compléter";
+          article.querySelector(".card-excerpt").textContent =
+            card.content ||
+            (card.title
+              ? "Aucune note pour le moment."
+              : "Ajoute ton titre, l’auteur et tes notes.");
+          article.querySelector(".work-name").textContent =
+            card.work || "Œuvre à compléter";
+          article
+            .querySelector(".edit-button")
+            .setAttribute(
+              "aria-label",
+              `Modifier le texte ${index + 1}${card.title ? " : " + card.title : ""}`,
+            );
+          article
+            .querySelector(".edit-button")
+            .addEventListener("click", () => openEditor(index));
+          article.addEventListener("click", (event) => {
+            if (!event.target.closest(".edit-button")) openDetails(index);
+          });
+          article.addEventListener("keydown", (event) => {
+            if (
+              event.target === article &&
+              (event.key === "Enter" || event.key === " ")
+            ) {
+              event.preventDefault();
+              openDetails(index);
+            }
+          });
+          grid.append(article);
+        });
+
+        if (visibleCards === 0) {
+          const emptyMessage = document.createElement("p");
+          emptyMessage.className = "no-results";
+          emptyMessage.textContent =
+            "Aucun texte ne correspond à ta recherche.";
+          grid.append(emptyMessage);
+        }
+
+        const masteredCount = cards.filter((card) => card.mastered).length;
+        document.querySelector("#progress-label").textContent =
+          `${masteredCount} / ${TOTAL_CARDS}`;
+        document
+          .querySelector(".progress-track")
+          .setAttribute("aria-valuenow", String(masteredCount));
+        document.querySelector("#progress-fill").style.width =
+          `${(masteredCount / TOTAL_CARDS) * 100}%`;
+      }
+
+      function openDetails(index) {
+        const card = cards[index];
+        document.querySelector("#detail-number").textContent =
+          `TEXTE ${String(index + 1).padStart(2, "0")}`;
+        document.querySelector("#detail-title").textContent =
+          card.title || "Nouveau texte";
+        document.querySelector("#detail-author").textContent =
+          card.author || "Auteur à compléter";
+        document.querySelector("#detail-work").textContent =
+          card.work || "Aucune œuvre ou parcours renseigné.";
+        const content = card.content || "*Aucun contenu pour le moment.*";
+        const contentElement = document.querySelector("#detail-content");
+        if (window.marked && window.DOMPurify) {
+          contentElement.innerHTML = DOMPurify.sanitize(marked.parse(content));
+        } else {
+          contentElement.textContent = content;
+        }
+        document
+          .querySelector("#detail-work")
+          .classList.toggle("detail-empty", !card.work);
+        document
+          .querySelector("#detail-content")
+          .classList.toggle("detail-empty", !card.content);
+        const status = document.querySelector("#detail-status");
+        status.textContent = card.mastered ? "Maîtrisé" : "À réviser";
+        status.classList.toggle("mastered", card.mastered);
+        document
+          .querySelector("#detail-edit")
+          .setAttribute("aria-label", `Modifier le texte ${index + 1}`);
+        activeCard = index;
+        detailDialog.showModal();
+      }
+
+      function openEditor(index) {
+        activeCard = index;
+        const card = cards[index];
+        form.elements.title.value = card.title;
+        form.elements.author.value = card.author;
+        form.elements.work.value = card.work;
+        form.elements.content.value = card.content;
+        form.elements.mastered.checked = card.mastered;
+        document.querySelector("#dialog-eyebrow").textContent =
+          `FICHE ${String(index + 1).padStart(2, "0")}`;
+        document.querySelector("#delete-button").style.visibility =
+          Object.entries(card).some(
+            ([key, value]) => key !== "mastered" && value,
+          )
+            ? "visible"
+            : "hidden";
+        dialog.showModal();
+        form.elements.title.focus();
+      }
+
+      function closeEditor() {
+        dialog.close();
+        activeCard = null;
+      }
+
+      function closeDetails() {
+        detailDialog.close();
+        activeCard = null;
+      }
+
+      document.querySelector("#add-button").addEventListener("click", () => {
+        const firstEmpty = cards.findIndex((card) =>
+          Object.entries(card).every(
+            ([key, value]) => key === "mastered" || !value,
+          ),
+        );
+        openEditor(firstEmpty === -1 ? 0 : firstEmpty);
+      });
+      document
+        .querySelector("#close-dialog")
+        .addEventListener("click", closeEditor);
+      document
+        .querySelector("#cancel-button")
+        .addEventListener("click", closeEditor);
+      document
+        .querySelector("#close-detail")
+        .addEventListener("click", closeDetails);
+      document.querySelector("#detail-edit").addEventListener("click", () => {
+        if (activeCard === null) return;
+        const index = activeCard;
+        closeDetails();
+        openEditor(index);
+      });
+      document.querySelector("#delete-button").addEventListener("click", () => {
+        if (activeCard === null) return;
+        cards[activeCard] = emptyCard();
+        if (storageAvailable && persistCards()) {
+          closeEditor();
+          render();
+        }
+      });
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (activeCard === null) return;
+        cards[activeCard] = {
+          title: form.elements.title.value.trim(),
+          author: form.elements.author.value.trim(),
+          work: form.elements.work.value.trim(),
+          content: form.elements.content.value.trim(),
+          mastered: form.elements.mastered.checked,
+        };
+        if (storageAvailable && persistCards()) {
+          closeEditor();
+          render();
+        }
+      });
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) closeEditor();
+      });
+      detailDialog.addEventListener("click", (event) => {
+        if (event.target === detailDialog) closeDetails();
+      });
+      search.addEventListener("input", render);
+
+      render();
+    </script>
+  </body>
+</html>
